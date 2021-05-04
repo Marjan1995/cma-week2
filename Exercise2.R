@@ -41,3 +41,17 @@ ggplot(wildschwein_BE,
 
 
 # Task 2
+a <-c(wildschwein_BE$E)
+b <- c(wildschwein_BE$N)
+euclidean(a,b)
+steplength <- as.numeric(euclidean (a,b), units="m")
+steplength
+speed_002A <- steplength/1286
+speed_002A
+speed_016A <- steplength/1412
+speed_016A
+speed_018A <- steplength/1599
+speed_018A
+# The speed unit is m per second. For 002A is 240300.6 m/s. For 016A is 218857.3 m/s. And for 018A is 193262.4 m/s.
+
+# Task 3
