@@ -55,3 +55,16 @@ speed_018A
 # The speed unit is m per second. For 002A is 240300.6 m/s. For 016A is 218857.3 m/s. And for 018A is 193262.4 m/s.
 
 # Task 3
+caro60 <- read_delim("caro60.csv",",")
+caro60 <- st_as_sf(caro60, coords = c("E", "N"), crs = 2056, remove = FALSE)
+caro_3 <- seq(from = 1, to = 200, by=3)
+caro_3 
+caro_6 <- seq(from = 1, to = 200, by=6)
+caro_6
+caro_9 <- seq(from = 1, to = 200, by=9)
+caro_9
+nrow(caro60)
+nrow(caro_3)
+nrow(caro_6)
+nrow(caro_9)
+
