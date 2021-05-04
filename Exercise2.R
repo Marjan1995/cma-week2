@@ -36,6 +36,6 @@ summarise(wildschwein_BE, mean = mean(timelag, na.rm = T))
 
 # Task 1
 # How many individuals were tracked? There are 3 individuals, who were tracked. (TierID are only three: 002A,016A and 018A)
-# For how long were the individual tracked? Are there gaps?
+# For how long were the individual tracked? Are there gaps? 002A has been tracked for 1286 sec, 016A for 1412 sec and 018A for 1599 sec.
 # Were all individuals tracked concurrently or sequentially?
 # What is the temporal sampling interval between the locations?
