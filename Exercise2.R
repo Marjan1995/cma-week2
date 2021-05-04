@@ -27,15 +27,17 @@ lag(numbers,n = 5, default = 0)
 summary(wildschwein_BE$timelag)
 wildschwein_BE <- mutate(wildschwein_BE,timelag = as.integer(difftime(lead(DatetimeUTC),DatetimeUTC)))
 summarise(wildschwein_BE, mean = mean(timelag, na.rm = T))
-
-
-
-
-
-
-
+library(ggplot2)
+ggplot(wildschwein_BE, 
+       aes(x=wildschwein_BE$DatetimeUTC, y= wildschwein_BE$timelag, color=wildschwein_BE$TierID)) +
+  geom_line(size=1) +
+  labs(title = "Tracking")
+  
 # Task 1
 # How many individuals were tracked? There are 3 individuals, who were tracked. (TierID are only three: 002A,016A and 018A)
-# For how long were the individual tracked? Are there gaps? 002A has been tracked for 1286 sec, 016A for 1412 sec and 018A for 1599 sec.
-# Were all individuals tracked concurrently or sequentially?
-# What is the temporal sampling interval between the locations?
+# For how long were the individual tracked? Are there gaps? 002A has been tracked for 1286 sec, 016A for 1412 sec and 018A for 1599 sec
+# Were all individuals tracked concurrently or sequentially? 002A was tracked seperately, but 016A and 018A werde tracked concurrently
+# What is the temporal sampling interval between the locations? From October 2014 until July 2015
+
+
+# Task 2
