@@ -120,3 +120,19 @@ speedcaro <- speedlenghtcaro/60
 speedcaro
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Task 4
+library(zoo)
+
