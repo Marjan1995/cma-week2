@@ -41,18 +41,44 @@ ggplot(wildschwein_BE,
 
 
 # Task 2
-a <-c(wildschwein_BE$E)
-b <- c(wildschwein_BE$N)
+wildschwein_BE <- group_by(wildschwein_BE,TierID)
+sabi <- filter(wildschwein_BE, TierID == "002A")
+sabi
+a <- c(sabi$E)
+a
+b <- c(sabi$N)
+b
+euclidean <- function(a,b) sqrt(sum(a-b)^2)
 euclidean(a,b)
-steplength <- as.numeric(euclidean (a,b), units="m")
-steplength
-speed_002A <- steplength/1286
-speed_002A
-speed_016A <- steplength/1412
-speed_016A
-speed_018A <- steplength/1599
-speed_018A
-# The speed unit is m per second. For 002A is 240300.6 m/s. For 016A is 218857.3 m/s. And for 018A is 193262.4 m/s.
+speedlenghtsabi <- euclidean(a,b)
+speedsabi <- sppedlenghtsabi/1286
+speedsabi
+
+rosa <- filter(wildschwein_BE, TierID == "016A")
+rosa
+c <- c(rosa$E)
+c
+d <- c(rosa$N)
+d
+euclidean <- function(c,d) sqrt(sum(c-d)^2)
+euclidean(c,d)
+speedlengthrosa <- euclidean(c,d)
+speedrosa <- speedlengthrosa/1412
+speedrosa
+
+ruth <- filter(wildschwein_BE, TierID == "018A")
+ruth
+e <- c(ruth$E)
+e
+f <- c(ruth$N)
+f
+euclidean <- function(e,f) sqrt(sum(e-f)^2)
+euclidean(e,f)
+speedlengthruth <- euclidean(e,f)
+speedruth <- speedlengthruth/1599
+speedruth
+
+# The speed unit is m per second. For 002A is 24138006 m/s. For 016A is 13914487 m/s. And for 018A is 12049596 m/s.
 
 # Task 3
 caro60 <- read_delim("caro60.csv",",")
