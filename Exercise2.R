@@ -118,11 +118,80 @@ speedcaro60 <- speedlenghtcaro60/1
 speedcaro60
 #For the dataset caro60 is the timelag 1s.The speedlenght is 273095159m. And the speed 273095159m/s.
 
+caro_3$timelag  <- as.integer(difftime(lead(caro_3$DatetimeUTC), caro_3$DatetimeUTC, units = "sec"))
+caro_3$timelag
+str(caro_3$timelag)
+numbers <- 1:10
+numbers
+library(dplyr)
+lead(numbers)
+lead(numbers,n = 2)
+lag(numbers)
+lag(numbers,n = 5)
+lag(numbers,n = 5, default = 0)
+summary(caro_3$timelag)
+caro_3 <- mutate(caro_3,timelag = as.integer(difftime(lead(DatetimeUTC),DatetimeUTC)))
+summarise(caro_3, mean = mean(timelag, na.rm = T))
+aaa <- c(caro_3$E)
+aaa
+bbb <- c(caro_3$N)
+bbb
+euclidean <- function(aaa,bbb) sqrt(sum(aaa-bbb)^2)
+euclidean(aaa,bbb)
+speedlenghtcaro_3 <- euclidean(aaa,bbb)
+speedcaro_3 <- speedlenghtcaro_3/3
+speedcaro_3
+# For the dataset caro_3 there are this results:3 seconds,91486858 m and 30495619 m/s.
 
+caro_6$timelag  <- as.integer(difftime(lead(caro_6$DatetimeUTC), caro_6$DatetimeUTC, units = "sec"))
+caro_6$timelag
+str(caro_6$timelag)
+numbers <- 1:10
+numbers
+library(dplyr)
+lead(numbers)
+lead(numbers,n = 2)
+lag(numbers)
+lag(numbers,n = 5)
+lag(numbers,n = 5, default = 0)
+summary(caro_6$timelag)
+caro_6 <- mutate(caro_6,timelag = as.integer(difftime(lead(DatetimeUTC),DatetimeUTC)))
+summarise(caro_6, mean = mean(timelag, na.rm = T))
+ee <- c(caro_6$E)
+ee
+ff <- c(caro_6$N)
+ff
+euclidean <- function(ee,ff) sqrt(sum(ee-ff)^2)
+euclidean(ee,ff)
+speedlenghtcaro_6 <- euclidean(ee,ff)
+speedcaro_6 <- speedlenghtcaro_6/6
+speedcaro_6
+# For caro_6: 6s, 46426223 m and 7737704 m/s.
 
-
-
-
+caro_9$timelag  <- as.integer(difftime(lead(caro_9$DatetimeUTC), caro_9$DatetimeUTC, units = "sec"))
+caro_9$timelag
+str(caro_9$timelag)
+numbers <- 1:10
+numbers
+library(dplyr)
+lead(numbers)
+lead(numbers,n = 2)
+lag(numbers)
+lag(numbers,n = 5)
+lag(numbers,n = 5, default = 0)
+summary(caro_9$timelag)
+caro_9 <- mutate(caro_9,timelag = as.integer(difftime(lead(DatetimeUTC),DatetimeUTC)))
+summarise(caro_9, mean = mean(timelag, na.rm = T))
+eee <- c(caro_9$E)
+eee
+fff <- c(caro_9$N)
+fff
+euclidean <- function(eee,fff) sqrt(sum(eee-fff)^2)
+euclidean(eee,fff)
+speedlenghtcaro_9 <- euclidean(eee,fff)
+speedcaro_6 <- speedlenghtcaro_6/6
+speedcaro_6
+#For caro_9: 9s, 31405957 m and 7737704 m/s.
 
 
 
