@@ -93,4 +93,30 @@ nrow(caro60)
 nrow(caro_3)
 nrow(caro_6)
 nrow(caro_9)
+caro60 <- group_by(caro60,TierID)
+caro60$timelag  <- as.integer(difftime(lead(caro60$DatetimeUTC), caro60$DatetimeUTC, units = "sec"))
+caro60$timelag
+str(caro60$timelag)
+numbers <- 1:10
+numbers
+lead(numbers)
+lead(numbers,n = 2)
+lag(numbers)
+lag(numbers,n = 5)
+lag(numbers,n = 5, default = 0)
+summary(caro60$timelag)
+wildschwein_BE <- mutate(caro60,timelag = as.integer(difftime(lead(DatetimeUTC),DatetimeUTC)))
+summarise(caro60, mean = mean(timelag, na.rm = T))
+# The timelag for the data set caro60 is 60 seconds. The steplength is 273095159 m. And the speed is 4551586 m/s.
+caro60 <- group_by(caro60,TierID)
+aa <- c(caro60$E)
+aa
+bb <- c(caro60$N)
+bb
+euclidean <- function(aa,bb) sqrt(sum(aa-bb)^2)
+euclidean(aa,bb)
+speedlenghtcaro <- euclidean(aa,bb)
+speedcaro <- speedlenghtcaro/60
+speedcaro
+
 
