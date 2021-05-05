@@ -41,44 +41,13 @@ ggplot(wildschwein_BE,
 
 
 # Task 2
+wildschwein_BE <- read_delim("wildschwein_BE_2056.csv",",")
+wildschwein_BE <- st_as_sf(wildschwein_BE, coords = c("E", "N"), crs = 2056, remove = FALSE)
 wildschwein_BE <- group_by(wildschwein_BE,TierID)
-sabi <- filter(wildschwein_BE, TierID == "002A")
-sabi
-a <- c(sabi$E)
-a
-b <- c(sabi$N)
-b
-euclidean <- function(a,b) sqrt(sum(a-b)^2)
-euclidean(a,b)
-speedlenghtsabi <- euclidean(a,b)
-speedsabi <- sppedlenghtsabi/1286
-speedsabi
+wildschwein_BE <- mutate(steplength = as.numeric(sqrt((wildschwein_BE$E - lead(wildschwein_BE$E,1))^2 + (wildschwein_BE$N - lead(wildschwein_BE$N,1))^2)))
 
-rosa <- filter(wildschwein_BE, TierID == "016A")
-rosa
-c <- c(rosa$E)
-c
-d <- c(rosa$N)
-d
-euclidean <- function(c,d) sqrt(sum(c-d)^2)
-euclidean(c,d)
-speedlengthrosa <- euclidean(c,d)
-speedrosa <- speedlengthrosa/1412
-speedrosa
 
-ruth <- filter(wildschwein_BE, TierID == "018A")
-ruth
-e <- c(ruth$E)
-e
-f <- c(ruth$N)
-f
-euclidean <- function(e,f) sqrt(sum(e-f)^2)
-euclidean(e,f)
-speedlengthruth <- euclidean(e,f)
-speedruth <- speedlengthruth/1599
-speedruth
-
-# The speed unit is m per second. For 002A is 24138006 m/s. For 016A is 13914487 m/s. And for 018A is 12049596 m/s.
+# The speed unit is m per second. 
 
 # Task 3
 caro60 <- read_delim("caro60.csv",",")
@@ -95,6 +64,7 @@ nrow(caro_6)
 nrow(caro_9)
 caro60$timelag  <- as.integer(difftime(lead(caro60$DatetimeUTC), caro60$DatetimeUTC, units = "sec"))
 caro60$timelag
+summarise(caro60, mean = mean(timelag, na.rm = T))
 str(caro60$timelag)
 numbers <- 1:10
 numbers
@@ -114,13 +84,14 @@ bb
 euclidean <- function(aa,bb) sqrt(sum(aa-bb)^2)
 euclidean(aa,bb)
 speedlenghtcaro60 <- euclidean(aa,bb)
-speedcaro60 <- speedlenghtcaro60/1
+speedcaro60 <- speedlenghtcaro60/60
 speedcaro60
-#For the dataset caro60 is the timelag 1s.The speedlenght is 273095159m. And the speed 273095159m/s.
+#For the dataset caro60 is the timelag 60s.The speedlenght is 273095159m. And the speed 4551586m/s.
 
 caro_3$timelag  <- as.integer(difftime(lead(caro_3$DatetimeUTC), caro_3$DatetimeUTC, units = "sec"))
 caro_3$timelag
 str(caro_3$timelag)
+summarise(caro_3, mean = mean(timelag, na.rm = T))
 numbers <- 1:10
 numbers
 library(dplyr)
@@ -139,13 +110,14 @@ bbb
 euclidean <- function(aaa,bbb) sqrt(sum(aaa-bbb)^2)
 euclidean(aaa,bbb)
 speedlenghtcaro_3 <- euclidean(aaa,bbb)
-speedcaro_3 <- speedlenghtcaro_3/3
+speedcaro_3 <- speedlenghtcaro_3/180
 speedcaro_3
-# For the dataset caro_3 there are this results:3 seconds,91486858 m and 30495619 m/s.
+# For the dataset caro_3 there are this results:180 seconds,91486858 m and 508260.3 m/s.
 
 caro_6$timelag  <- as.integer(difftime(lead(caro_6$DatetimeUTC), caro_6$DatetimeUTC, units = "sec"))
 caro_6$timelag
 str(caro_6$timelag)
+summarise(caro_6, mean = mean(timelag, na.rm = T))
 numbers <- 1:10
 numbers
 library(dplyr)
@@ -164,13 +136,14 @@ ff
 euclidean <- function(ee,ff) sqrt(sum(ee-ff)^2)
 euclidean(ee,ff)
 speedlenghtcaro_6 <- euclidean(ee,ff)
-speedcaro_6 <- speedlenghtcaro_6/6
+speedcaro_6 <- speedlenghtcaro_6/360
 speedcaro_6
-# For caro_6: 6s, 46426223 m and 7737704 m/s.
+# For caro_6: 360s, 46426223 m and 128961 m/s.
 
 caro_9$timelag  <- as.integer(difftime(lead(caro_9$DatetimeUTC), caro_9$DatetimeUTC, units = "sec"))
 caro_9$timelag
 str(caro_9$timelag)
+summarise(caro_9, mean = mean(timelag, na.rm = T))
 numbers <- 1:10
 numbers
 library(dplyr)
@@ -189,12 +162,12 @@ fff
 euclidean <- function(eee,fff) sqrt(sum(eee-fff)^2)
 euclidean(eee,fff)
 speedlenghtcaro_9 <- euclidean(eee,fff)
-speedcaro_6 <- speedlenghtcaro_6/6
-speedcaro_6
-#For caro_9: 9s, 31405957 m and 7737704 m/s.
+speedcaro_9 <- speedlenghtcaro_9/540
+speedcaro_9
+#For caro_9: 540s, 31405957 m and 58159.18 m/s.
 
-
-
+# Compare speeds visually in a line plot and also visualize the trajectories in a map.
+# What do the different lines for the different temporal granularities tell you?
 
 
 
