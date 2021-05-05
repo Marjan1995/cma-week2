@@ -132,4 +132,28 @@ ggplot()+
 
 # Task 4
 library(zoo)
+example <- rnorm(10)
+rollmean(example,k = 3,fill = NA,align = "left")
+##  [1]  0.93634335  0.31709038  0.02370048  0.67869801  0.73369105  0.50401344
+##  [7] -0.56144365 -0.56902598          NA          NA
+rollmean(example,k = 4,fill = NA,align = "left")
+##  [1]  0.6775521  0.2045005  0.5848215  0.5255629  0.3446928  0.1459635
+##  [7] -0.4102301         NA         NA         NA
+
+caro_RollWindow <- caro60 %>%
+mutate(k3 = rollmean(speed, k=3, fill= NA, align = "left"),
+       k6 = rollmean(speed, k=6, fill= NA, align = "left"),
+       k9 = rollmean(speed, k=9, fill= NA, align = "left"),
+       k30 = rollmean(speed, k=30, fill= NA, align = "left"))
+ggplot(data = caro_RollWindow)+ ggtitle("Rolling Window")+
+  ylab("Speed in m per second")
+  xlab("Time")+
+    theme_set(theme_minimal())+
+    geom_line(aes(x = DatetimeUTC, y = speed, color ="Original"))+
+    geom_line(aes(x = DatetimeUTC, y = k3, color ="k3"))+
+    geom_line(aes(x = DatetimeUTC, y = k6, color ="k6"))+
+    geom_line(aes(x = DatetimeUTC, y = k9, color ="k9"))+
+    geom_line(aes(x = DatetimeUTC, y = k30, color ="k30"))+
+    scale_color_manual(name = "Size", breaks = c("Original","k3","k6","k9","k30"), values = c("Original" ="cyan", "k3"="magenta", "k6"="yellow", "k9"="red","k30"="green"))
+    
 
