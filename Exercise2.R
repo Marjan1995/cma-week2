@@ -164,5 +164,3 @@ ggplot(data = caro_RollWindow)+ ggtitle("Rolling Window")+
     scale_color_manual(name = "Size", breaks = c("Original","k3","k6","k9","k30"), values = c("Original" ="cyan", "k3"="magenta", "k6"="yellow", "k9"="red","k30"="green"))
   
 
-    
-
