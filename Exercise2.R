@@ -34,6 +34,12 @@ ggplot(wildschwein_BE)+geom_point(aes(x= wildschwein_BE$DatetimeUTC, y= wildschw
 wildschwein_BE <- group_by(wildschwein_BE,TierID)
 wildschwein_BE$steplength <- as.numeric(sqrt((wildschwein_BE$E - lead(wildschwein_BE$E,1))^2 + (wildschwein_BE$N - lead(wildschwein_BE$N,1))^2))
 wildschwein_BE$speed <- as.numeric(wildschwein_BE$steplength/wildschwein_BE$timelag)
+wildschwein_BE <-  wildschwein_BE %>%
+group_by(TierName) %>%
+mutate(steplength = sqrt((E- lead(E,1))^2 + (N -lead(N,1))^2))
+wildschwein_BE <- wildschwein_BE %>% 
+group_by(TierName) %>%
+mutate(speed = steplength/timelag)
 
 # The speed unit is m per second. Because the unit of geometry is meter.
 
@@ -127,7 +133,7 @@ ggplot()+
   geom_line(data = caro_6, aes(x = DatetimeUTC, y = speed, color ="6 Min"))+
   geom_line(data = caro_9, aes(x = DatetimeUTC, y = speed, color ="9 Min"))+
   scale_color_manual(name = "Sampling Interval", breaks = c("1 Min","3 Min", "6 Min","9 Min"), values = c("1 Min" = "cyan", "9 Min" = "magenta", "6 Min" = "blue", "3 Min" = "green"))
-# Higher Minutes has less difference.
+# Higher minutes have less difference in speed.
 
 
 # Task 4
@@ -145,8 +151,9 @@ mutate(k3 = rollmean(speed, k=3, fill= NA, align = "left"),
        k6 = rollmean(speed, k=6, fill= NA, align = "left"),
        k9 = rollmean(speed, k=9, fill= NA, align = "left"),
        k30 = rollmean(speed, k=30, fill= NA, align = "left"))
+
 ggplot(data = caro_RollWindow)+ ggtitle("Rolling Window")+
-  ylab("Speed in m per second")
+  ylab("Speed in m per second") +
   xlab("Time")+
     theme_set(theme_minimal())+
     geom_line(aes(x = DatetimeUTC, y = speed, color ="Original"))+
@@ -155,5 +162,7 @@ ggplot(data = caro_RollWindow)+ ggtitle("Rolling Window")+
     geom_line(aes(x = DatetimeUTC, y = k9, color ="k9"))+
     geom_line(aes(x = DatetimeUTC, y = k30, color ="k30"))+
     scale_color_manual(name = "Size", breaks = c("Original","k3","k6","k9","k30"), values = c("Original" ="cyan", "k3"="magenta", "k6"="yellow", "k9"="red","k30"="green"))
+  
+
     
 
